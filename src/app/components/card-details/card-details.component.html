@@ -1,0 +1,89 @@
+<div fxLayoutAlign="center" class="card-margin" *ngIf="pageType">
+  <div fxLayoutAlign="end end">
+    <button mat-raised-button color="accent" routerLink="/card-details">Card details</button>&nbsp;&nbsp;
+    <button mat-raised-button color="primary" routerLink="/">Home</button>
+  </div><br>
+    <div class="card-container"></div>
+
+<div fxLayoutAlign="center">
+  <mat-card fxFlex="100%">
+    <mat-card-header>
+      <mat-card-title>Payment Card</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" card container=".card-container"
+        [messages]="messages" [placeholders]="placeholders" [masks]="masks" formatting="false" debug="true">
+
+        <mat-form-field class="full-width">
+          <input matInput formControlName="cardno" placeholder="Card Number" card-number>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="firstName" placeholder="First Name" card-name pattern="^[a-zA-Z \-\']+">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="lastName" placeholder="Last Name" card-name pattern="^[a-zA-Z \-\']+">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="expDate" placeholder="Exp Date" card-expiry>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="cvvNo" placeholder="CVV" card-cvc maxlength="3">
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign="end end">
+          <button mat-raised-button color="primary">Save</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+<div *ngIf="!pageType" width="100%">
+  <div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Payment Details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayoutAlign="end end">
+          <button mat-raised-button color="primary" routerLink="/">Home</button>
+        </div><br>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  width="100%">
+
+          <ng-container matColumnDef="cardno">
+            <th mat-header-cell *matHeaderCellDef> Card Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.cardno}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef> firstName </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> lastName </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="expDate">
+            <th mat-header-cell *matHeaderCellDef> Expire Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.expDate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cvvNo">
+            <th mat-header-cell *matHeaderCellDef>CCV</th>
+            <td mat-cell *matCellDef="let element"> {{element.cvvNo}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
