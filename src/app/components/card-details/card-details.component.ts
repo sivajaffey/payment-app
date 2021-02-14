@@ -14,7 +14,7 @@ export class CardDetailsComponent implements OnInit {
   cardForm: FormGroup;
   constructor(private fb: FormBuilder, private service: CommonService, private route: Router,private toastr: ToastrService) { }
   pageType = true;
-  displayedColumns: string[] = ['cardno', 'firstName', 'lastName', 'cvvNo', 'expDate'];
+  displayedColumns: string[] = ['cardno', 'firstName', 'lastName', 'cvvNo', 'expDate', 'amount'];
 
   dataSource = [];
   ngOnInit() {
@@ -24,7 +24,8 @@ export class CardDetailsComponent implements OnInit {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         expDate: ['', Validators.required],
-        cvvNo: ['', Validators.required]
+        cvvNo: ['', Validators.required],
+        amount: ['', Validators.required]
       });
       this.pageType = true;
     } else if (this.route.url == "/card-details") {
